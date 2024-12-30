@@ -1,2 +1,24 @@
-# Hangman-game
-# Hangman Game  This is a simple Hangman game implemented in Python. The game selects a random word from a predefined list, and the player guesses letters to complete the word.  ## Features - Random word selection - Lives-based gameplay - Win or lose condition  ## How to Run 1. Clone the repository. 2. Run the script using Python 3.x:
+import random
+word_list = ["apple", "beautiful", "potato", "orange", "yellow", "blue"]
+lives = 6
+chosen_word = random.choice(word_list)
+print(f"The chosen word: {chosen_word}")
+display = ["_" for _ in chosen_word]
+print(display)
+game_over = False
+while not game_over:
+    guess_letter = input("Guess a letter: ").lower()
+    for pos in range(len(chosen_word)):
+        letter = chosen_word[pos]
+        if letter == guess_letter:
+            display[pos] = guess_letter 
+        print(display)
+    if guess_letter not in chosen_word:
+        lives -= 1
+        print(f"Wrong guess! Lives left: {lives}")
+        if lives == 0:
+            game_over = True
+            print("You Lose!")
+    if "_" not in display:
+        game_over = True
+        print("You Win!")
